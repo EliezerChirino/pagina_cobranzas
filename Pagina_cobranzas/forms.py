@@ -1,5 +1,6 @@
 from wtforms import Form
 from wtforms import StringField
+from wtforms.fields.html5 import EmailField
 from wtforms import IntegerField
 from wtforms import PasswordField
 from wtforms import RadioField
@@ -18,6 +19,7 @@ from wtforms.fields import TextAreaField
 from wtforms.fields import DateTimeField, TimeField
 
 
+
 def length_honeypot(form, field):
     if len(field.data) > 0:
         raise validators.ValidationError('El campo no debe estar vacio.')
@@ -27,6 +29,14 @@ class login(Form):
     clave = PasswordField("", [validators.InputRequired(message="Ingrese la contraseña!"),
                                validators.Length(min=6,max=15,message="Se requiere contraseña")])
     honeypot = HiddenField('',[length_honeypot])
+
+class RegistroForm(Form):
+    nombre= StringField("", [validators.InputRequired(message="Ingrese su nombre porfavor")])
+    identificacion = StringField("", [validators.InputRequired(message="Ingrese su nombre porfavor")])
+    contraseña = PasswordField("", [validators.InputRequired(message="Ingrese la contraseña!"),
+                               validators.Length(min=6,max=15,message="Se requiere contraseña")])
+    email= EmailField("Email",  [validators.InputRequired("Por favor, ingresa tu dirección de correo.")])
+    
     
 
     

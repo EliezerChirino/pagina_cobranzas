@@ -39,7 +39,42 @@ def formulario_cobranzas():
     titulo = "formulario_cobranzas"
     return render_template("index.html", titulo=titulo)
 
+
+@app.route ("/registro", methods= ["GET"])
+def registro():
+    titulo= "registro"
+    registro_form= forms.RegistroForm(request.form)
+    
+    if request.method== "POST":
+    #-------declaracion variables----------#
+        nombre=registro_form.nombre.data.lower()
+        contraseña=registro_form.apellido.data.lower()
+        identificacion=registro_form.username.data
+        email= registro_form.email.data
+        
+        
+    #-------Conexion base de datos----------#    
+        #connect=sqlite3.connect(" #basededatos")
+        #cursor= connect.cursor()
+        
+        #sentencia= (""" INSERT INTO usuarios () VALUES ()""" )
+        
+        
+        #cursor.execute( sentencia, ( nombre, contraseña, identificacion, email  ))
+        #connect.commit()
+        #connect.close()
+        
+        return redirect(url_for('login'))
+    return render_template("registro_usuario.html",titulo=titulo, form=registro_form)
+
+@app.route ("/tabla_vista_registro", methods= ["GET"])
+def tabla_vista_registro():
+    titulo= "tabla_vista_registro"
+
+    return render_template("tabla_vista_registro.html",titulo=titulo)
+
 if __name__ == "__main__":
     
 	app.run(debug=True, port=5000, host="0.0.0.0")
+ 
         
